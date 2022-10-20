@@ -37,11 +37,6 @@ struct CardBack : View {
 
     var body: some View {
         ZStack {
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(.blue.opacity(0.2))
-//                .frame(width: width, height: height)
-//                .shadow(color: .gray, radius: 2, x: 0, y: 0)
-
             Image("card back red")
                 .resizable()
                 .frame(width: width, height: height)
@@ -55,13 +50,14 @@ struct CardBack : View {
 struct ContentView: View {
     @StateObject private var cards = Game()
     @State var arr = [(back: 0.0, front: -90.0), (back: 0.0, front: -90.0), (back: 0.0, front: -90.0)]
-//    @State var isFlipped = false
     @State var flipped:[Bool] = [false, false, false]
-    @State var win:Bool = false
+    @State var stateVar = 0
+
+    @State var flipped2 = false
 
     let durationAndDelay : CGFloat = 0.3
     
-    func flipCard (a : Int) {
+    func flip (a : Int) {
             flipped[a] = !flipped[a]
             if flipped[a] {
                 withAnimation(.linear(duration: durationAndDelay)) {
@@ -83,6 +79,7 @@ struct ContentView: View {
     func flipCards(){
         for i in 0...2 {
             if(flipped[i]){
+                flipped[i] = false
                 withAnimation(.linear(duration: durationAndDelay)) {
                     arr[i].1 = -90
                 }
@@ -105,10 +102,15 @@ struct ContentView: View {
                                       degree: $arr[0].1)
                         CardBack(width: geo.size.width/4, height: geo.size.height/1.4, degree: $arr[0].0)
                     }.onTapGesture {
-                        if(!cards.win){
+                        if(!flipped2){
                             cards.toggle(0)
-//                            win = cards.win
-                            flipCard(a: 0)
+                            if(cards.win) {
+                                stateVar = 2
+                            } else {
+                                stateVar = 1
+                            }
+                            flip(a: 0)
+                            flipped2 = true
                         }
                     }
                     
@@ -118,10 +120,16 @@ struct ContentView: View {
                             degree: $arr[1].1)
                         CardBack(width: geo.size.width/4, height: geo.size.height/1.4, degree: $arr[1].0)
                     }.onTapGesture {
-                        if(!cards.win){
+                        if(!flipped2){
                             cards.toggle(1)
-                            win = cards.win
-                            flipCard(a: 1)
+                            if(cards.win) {
+                                stateVar = 2
+                            } else {
+                                stateVar = 1
+                            }
+                            flip(a: 1)
+                            flipped2 = true
+
                         }
                     }
                     
@@ -130,10 +138,16 @@ struct ContentView: View {
                                       image: cards.cards[2].image,degree: $arr[2].1)
                         CardBack(width: geo.size.width/4, height: geo.size.height/1.4, degree: $arr[2].0)
                     }.onTapGesture {
-                        if(!cards.win){
+                        if(!flipped2){
                             cards.toggle(2)
-                            win = cards.win
-                            flipCard(a: 2)
+                            if(cards.win) {
+                                stateVar = 2
+                            } else {
+                                stateVar = 1
+                            }
+                            flip(a: 2)
+                            flipped2 = true
+
                         }
                     }
                     
@@ -145,11 +159,17 @@ struct ContentView: View {
                     HStack {
                         VStack {
                             HStack{
-                                Text("Player Score")
-                                    .font(.body)
-                                Text("")
+                                Text("Player Score:")
+                                    .font(.caption)
+                                Text("\(cards.player)")
+                                    .font(.caption)
                             }
-                            Text("")
+                            HStack{
+                                Text("House Score:")
+                                    .font(.caption)
+                                Text("\(cards.house)")
+                                    .font(.caption)
+                            }
                         }
                         .foregroundColor(.white)
                         .padding()
@@ -157,26 +177,29 @@ struct ContentView: View {
                         Spacer()
                         
                         Button("Play Again") {
+                            flipped2 = false
                             flipCards()
                             cards.newGame()
-                            win = false
+                            stateVar = 0
                         }
                         .padding()
 
                     }
                 }
             }
-            WinView(gameOver: win, height: geo.size.height)
+            WinView(gameOver: stateVar, height: geo.size.height, width: geo.size.width)
         }
         
         
     }
 }
 
+/* Copied professors code here*/
 struct WinView: View {
     
-    var gameOver: Bool
+    var gameOver: Int
     var height: CGFloat
+    var width: CGFloat
     
     var body: some View {
         Text("You Won!")
@@ -184,8 +207,19 @@ struct WinView: View {
             .foregroundColor(.black)
             .background(.brown)
             .padding()
-            .offset(y: gameOver ? 0.0 : -height)
-            .animation(.interpolatingSpring(stiffness: 200, damping: 12), value: gameOver)
+            .offset(y: (gameOver == 2) ? 0.0 : -height)
+            .offset(x: (gameOver == 2) ? (width/10) : -width)
+            .animation(.interpolatingSpring(stiffness: 200, damping: 12), value: (gameOver == 2))
+
+        Text("You Lost!")
+           .font(.custom("Times", size: 98))
+           .foregroundColor(.black)
+           .background(.brown)
+           .padding()
+           .offset(y: (gameOver == 1) ? 0.0 : -height)
+           .offset(x: (gameOver == 1) ? (width/10) : -width)
+           .animation(.interpolatingSpring(stiffness: 200, damping: 12), value: (gameOver == 1))
+        
     }
 }
 

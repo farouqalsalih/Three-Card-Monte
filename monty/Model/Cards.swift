@@ -13,7 +13,6 @@ class Card: ObservableObject{
 }
 
 class Game :ObservableObject {
-    @Published var game = false
     @Published var player = 0
     @Published var house = 0
     @Published var win: Bool
@@ -29,7 +28,6 @@ class Game :ObservableObject {
     func newGame(){
         
         cards.shuffle()
-        game = false
         
     }
     
@@ -42,7 +40,6 @@ class Game :ObservableObject {
             win = true
         }
         
-        game = true
     }
     
     
