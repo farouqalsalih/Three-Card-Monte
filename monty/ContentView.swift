@@ -33,6 +33,7 @@ struct CardFrontView : View {
 struct CardBack : View {
     let width : CGFloat
     let height : CGFloat
+    
     @Binding var degree : Double
 
     var body: some View {
@@ -58,23 +59,23 @@ struct ContentView: View {
     let durationAndDelay : CGFloat = 0.3
     
     func flip (a : Int) {
-            flipped[a] = !flipped[a]
-            if flipped[a] {
-                withAnimation(.linear(duration: durationAndDelay)) {
-                    arr[a].0 = 90
-                }
-                withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
-                    arr[a].1 = 0
-                }
-            } else {
-                withAnimation(.linear(duration: durationAndDelay)) {
-                    arr[a].1 = -90
-                }
-                withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
-                    arr[a].0 = 0
-                }
+        flipped[a] = !flipped[a]
+        if flipped[a] {
+            withAnimation(.linear(duration: durationAndDelay)) {
+                arr[a].0 = 90
+            }
+            withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
+                arr[a].1 = 0
+            }
+        } else {
+            withAnimation(.linear(duration: durationAndDelay)) {
+                arr[a].1 = -90
+            }
+            withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
+                arr[a].0 = 0
             }
         }
+    }
     
     func flipCards(){
         for i in 0...2 {
@@ -187,6 +188,7 @@ struct ContentView: View {
                     }
                 }
             }
+            
             WinView(gameOver: stateVar, height: geo.size.height, width: geo.size.width)
         }
         
