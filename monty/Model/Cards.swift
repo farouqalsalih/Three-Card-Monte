@@ -8,11 +8,43 @@
 import Foundation
 
 class Card: ObservableObject{
-    var cards:[card] = [card(image: "x", ace: false), card(image: "x", ace: false), card(image: "ace", ace: true)]
+    var cards:[card] = [card(id: 0, image: "x", ace: false), card(id: 1, image: "x", ace: false), card(id: 2, image: "ace", ace: true)]
     
 }
 
-class Game {
+class Game :ObservableObject {
+    @Published var game = false
+    @Published var player = 0
+    @Published var house = 0
+    @Published var win: Bool
+    var cards:[card]
+    
+    init(){
+        let obj = Card()
+        win = false
+        cards = obj.cards
+        newGame()
+    }
+    
+    func newGame(){
+        
+        cards.shuffle()
+        game = false
+        
+    }
+    
+    func toggle(_ id: Int) {
+        if cards[id].ace == false {
+            house += 3
+            win = false
+        } else {
+            player+=3
+            win = true
+        }
+        
+        game = true
+    }
+    
     
 }
 

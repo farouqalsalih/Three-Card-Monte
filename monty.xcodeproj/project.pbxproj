@@ -11,7 +11,6 @@
 		35C07DAA28FE16B600A599CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C07DA928FE16B600A599CA /* ContentView.swift */; };
 		35C07DAC28FE16B800A599CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35C07DAB28FE16B800A599CA /* Assets.xcassets */; };
 		35C07DAF28FE16B800A599CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35C07DAE28FE16B800A599CA /* Preview Assets.xcassets */; };
-		35C07DB628FE3DBB00A599CA /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C07DB528FE3DBB00A599CA /* CardView.swift */; };
 		35C07DBA28FE3E4700A599CA /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C07DB928FE3E4700A599CA /* Cards.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,7 +20,6 @@
 		35C07DA928FE16B600A599CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35C07DAB28FE16B800A599CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35C07DAE28FE16B800A599CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		35C07DB528FE3DBB00A599CA /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		35C07DB928FE3E4700A599CA /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +58,6 @@
 				35C07DA928FE16B600A599CA /* ContentView.swift */,
 				35C07DAB28FE16B800A599CA /* Assets.xcassets */,
 				35C07DAD28FE16B800A599CA /* Preview Content */,
-				35C07DB528FE3DBB00A599CA /* CardView.swift */,
 			);
 			path = monty;
 			sourceTree = "<group>";
@@ -152,7 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				35C07DAA28FE16B600A599CA /* ContentView.swift in Sources */,
-				35C07DB628FE3DBB00A599CA /* CardView.swift in Sources */,
 				35C07DA828FE16B600A599CA /* montyApp.swift in Sources */,
 				35C07DBA28FE3E4700A599CA /* Cards.swift in Sources */,
 			);
